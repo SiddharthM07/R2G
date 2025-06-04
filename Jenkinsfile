@@ -20,7 +20,7 @@ pipeline{
         }
         stage('Package Artifact') {
             steps {
-                sh 'python3 generate_artifact.py' // This should generate artifact.py
+                sh 'python3 test.py' // This should generate artifact.py
             }
         }
 
