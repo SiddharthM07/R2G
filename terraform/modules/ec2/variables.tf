@@ -19,3 +19,7 @@ variable "create_ec2" {
     default = true
   
 }
+variable "key_name" {
+    type = string
+
+}

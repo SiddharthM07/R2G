@@ -11,6 +11,7 @@ module "ec2_instance" {
   instance_type = "t2.micro"
   count = var.create_ec2 ? 1:0
   instance_name = "devops_test"
+  key_name = aws_key_pair.my_key.key_name
 }
 
 module "s3_bucket" {
@@ -20,3 +21,8 @@ module "s3_bucket" {
 
 }
 
+resource "aws_key_pair" "my_key" {
+    key_name = "my_aws_key_new"
+    public_key = file("~/.ssh/my-aws-key.pub")
+  
+}
