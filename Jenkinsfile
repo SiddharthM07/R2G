@@ -22,6 +22,7 @@ pipeline{
             steps {
                 sh 'python3 generate_artifact.py' // This should generate artifact.py
             }
+        }
 
         stage('Upload to S3'){
             steps{
@@ -50,5 +51,5 @@ pipeline{
     }
 
 }
-}
+
 
