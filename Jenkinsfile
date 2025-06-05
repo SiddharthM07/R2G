@@ -20,7 +20,7 @@ pipeline {
 
         stage('Upload to S3') {
             steps {
-                sh 'aws s3 cp artifact.py s3://$S3_BUCKET/'
+                sh 'aws s3 cp artifact_script.py s3://$S3_BUCKET/'
             }
         }
     }
