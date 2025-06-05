@@ -1,55 +1,36 @@
-pipeline{
+pipeline {
     agent any
 
     environment {
-
-        S3_bucket = "test-devops1211"
-        Ec2_user = "ubuntu"
-        EC2_host = "13.234.21.105"
-        Pem_File = "~/.ssh/my-aws-key.pub"
-
+        S3_BUCKET = "test-devops1211"
     }
 
-    stages{
-
-        stage ('Clone Repo'){
+    stages {
+        stage('Clone Repo') {
             steps {
-                git branch: 'R2G' , url: 'https://github.com/SiddharthM07/R2G.git'
-
+                git branch: 'R2G', url: 'https://github.com/SiddharthM07/R2G.git'
             }
         }
+
         stage('Package Artifact') {
             steps {
-                sh 'python3 test.py' // This should generate artifact.py
+                sh 'python3 test.py' // Generates artifact.py
             }
         }
 
-        stage('Upload to S3'){
-            steps{
-                sh 'aws s3 cp artifact.py s3://$S3_bucket/ --profile SiddharthM'
+        stage('Upload to S3') {
+            steps {
+                sh 'aws s3 cp artifact.py s3://$S3_BUCKET/'
             }
-        }
-        stage('Download on EC2 & Deploy'){
-            steps{
-                sh '''
-                chmod 400 $Pem_File
-                scp -o StrictHostKeyChecking=no -i  $Pem_File artifact.py $Ec2_user@EC2_host: /home/ubuntu/
-                '''
-            }
-        }
-
-    }
-
-    post{
-        success{
-            echo 'Success'
-        }
-
-        failure{
-            echo 'Failed'
         }
     }
 
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
 }
-
-

@@ -11,4 +11,4 @@ artifact_filename = "artifact_script.py"
 with open(artifact_filename, "w") as f:
     f.write(artifact_code)
 
-print(f"✅ Artifact '{artifact_filename}' created successfully!")
+print(f"Artifact '{artifact_filename}' created successfully!")
